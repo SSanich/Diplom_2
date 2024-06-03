@@ -6,6 +6,7 @@ import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 
 import static Praktikum.Constants.BASE_URI;
+import static Praktikum.Constants.ORDERS;
 import static io.restassured.RestAssured.given;
 
 
@@ -15,18 +16,16 @@ public class OrderClient  extends Model {
         return   spec()
                 .body(order)
                 .when()
-                .post("api/orders")
+                .post(ORDERS)
                 .then().log().all();
     }
 
     @Step("Getting orders from auth user")
     public ValidatableResponse getOrdersAuth(String accessToken) {
-        return given().log().all()
-                .contentType(ContentType.JSON)
-                .header("authorization", accessToken)
-                .baseUri(BASE_URI)
+        return spec()
+//                .header("authorization", accessToken)
                 .when()
-                .get("api/orders")
+                .get(ORDERS)
                 .then()
                 .log().all();
     }
@@ -37,7 +36,7 @@ public class OrderClient  extends Model {
                 .contentType(ContentType.JSON)
                 .baseUri(BASE_URI)
                 .when()
-                .get("api/orders")
+                .get(ORDERS)
                 .then()
                 .log().all();
     }
