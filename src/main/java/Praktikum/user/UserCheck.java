@@ -2,76 +2,61 @@ package Praktikum.user;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-
 import java.net.HttpURLConnection;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 public class UserCheck {
     @Step("Check user create ")
-    public static void checkCreatedSuccessfully(ValidatableResponse createResponse) {
-        boolean created = createResponse
+    public void checkCreatedSuccessfully(ValidatableResponse createResponse) {
+        createResponse
                 .assertThat()
-                .statusCode(HttpURLConnection.HTTP_OK)
-                .extract()
-                .path("success");
-        assertTrue(created);
+                .body("success", equalTo(true))
+                .statusCode(HttpURLConnection.HTTP_OK);
     }
 
     @Step("Check user login successfully")
-    public static void checkLoggedInSuccessfully(ValidatableResponse loginResponse) {
-        boolean logged = loginResponse
+    public void checkLoggedInSuccessfully(ValidatableResponse loginResponse) {
+        loginResponse
                 .assertThat()
-                .statusCode(HttpURLConnection.HTTP_OK)
-                .extract()
-                .path("success");
-        assertTrue(logged);
+                .body("success", equalTo(true))
+                .statusCode(HttpURLConnection.HTTP_OK);
     }
 
     @Step("Check can not create same user")
-    public static void checkNotCreatedSameUser(ValidatableResponse createSecondUserResponse) {
-        boolean created = createSecondUserResponse
+    public void checkNotCreatedSameUser(ValidatableResponse createSecondUserResponse) {
+        createSecondUserResponse
                 .assertThat()
-                .statusCode(HttpURLConnection.HTTP_FORBIDDEN)
-                .extract()
-                .path("success");
-        assertFalse(created);
+                .body("success", equalTo(false))
+                .statusCode(HttpURLConnection.HTTP_FORBIDDEN);
     }
 
     @Step("Check can not create user without required fields")
-    public static void checkNotCreatedWithoutOneField(ValidatableResponse createResponse) {
-        boolean created = createResponse
+    public void checkNotCreatedWithoutOneField(ValidatableResponse createResponse) {
+        createResponse
                 .assertThat()
-                .statusCode(HttpURLConnection.HTTP_FORBIDDEN)
-                .extract()
-                .path("success");
-        assertFalse(created);
+                .body("success", equalTo(false))
+                .statusCode(HttpURLConnection.HTTP_FORBIDDEN);
     }
 
     @Step("Check can not login with wrong params")
-    public static void checkNotLoggedInWithWrongParams(ValidatableResponse loginResponse) {
-        boolean logged = loginResponse
+    public void checkNotLoggedInWithoutRequiredField(ValidatableResponse loginResponse) {
+        loginResponse
                 .assertThat()
-                .statusCode(HttpURLConnection.HTTP_UNAUTHORIZED)
-                .extract()
-                .path("success");
-        assertFalse(logged);
+                .body("success", equalTo(false))
+                .statusCode(HttpURLConnection.HTTP_UNAUTHORIZED);
     }
 
     @Step("Check of change user data")
-    public static void checkChanged(ValidatableResponse changeResponse) {
-        boolean changed = changeResponse
-                .extract()
-                .path("success");
-        assertTrue(changed);
+    public void checkChanged(ValidatableResponse changeResponse) {
+         changeResponse
+                 .assertThat()
+                 .body("success", equalTo(true));
     }
 
     @Step("Check not auth user can not change data")
-    public static void checkChangedWithoutAuth(ValidatableResponse changeResponse) {
-        boolean changed = changeResponse
-                .extract()
-                .path("success");
-        assertFalse(changed);
+    public void checkChangedWithoutAuth(ValidatableResponse changeResponse) {
+        changeResponse
+                .assertThat()
+                .body("success", equalTo(false));
     }
 }

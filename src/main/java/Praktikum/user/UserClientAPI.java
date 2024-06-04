@@ -1,23 +1,17 @@
 package Praktikum.user;
 
-import static io.restassured.RestAssured.given;
-
+import static Praktikum.Constants.*;
+import Praktikum.Model;
 import io.qameta.allure.Step;
-import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 
-public class UserClient {
-    private static final String BASE_URI = "https://stellarburgers.nomoreparties.site/";
-    private static final String COURIER_AUTH_PATH = "/api/auth";
-
+public class UserClientAPI extends Model {
     @Step("Create correct user")
     public ValidatableResponse createUser(User user) {
-        return given().log().all()
-                .contentType(ContentType.JSON)
-                .baseUri(BASE_URI)
+        return spec()
                 .body(user)
                 .when()
-                .post(COURIER_AUTH_PATH+"/register")
+                .post(CREATE_USER_URL)
                 .then().log().all();
     }
 
@@ -30,48 +24,40 @@ public class UserClient {
     }
 
     @Step("Delete user")
-    public void deleteUser(String accessToken) {
-        given().log().all()
-                .contentType(ContentType.JSON)
-                .header("authorization",accessToken)
-                .baseUri(BASE_URI)
+    public ValidatableResponse deleteUser(String accessToken) {
+        return spec()
+                .header("authorization", accessToken)
                 .when()
-                .delete(COURIER_AUTH_PATH+"/user")
+                .delete(CHANGE_USER_URL)
                 .then().log().all();
     }
 
     @Step("Login user")
     public ValidatableResponse loginUser(UserCredentials creds) {
-        return given().log().all()
-                .contentType(ContentType.JSON)
-                .baseUri(BASE_URI)
+        return spec()
                 .body(creds)
                 .when()
-                .post(COURIER_AUTH_PATH+"/login")
+                .post(LOGIN_USER_URL)
                 .then().log().all();
     }
 
     @Step("Changing user data")
     public ValidatableResponse changeUserData(String accessToken, User user2) {
-        return given().log().all()
-                .contentType(ContentType.JSON)
+        return spec()
                 .header("authorization", accessToken)
-                .baseUri(BASE_URI)
                 .body(user2)
                 .when()
-                .patch(COURIER_AUTH_PATH + "/user")
+                .patch(CHANGE_USER_URL)
                 .then()
                 .log().all();
     }
 
     @Step("Changing not auth user data")
     public ValidatableResponse changeUserDataWithoutAuth(User user2) {
-        return given().log().all()
-                .contentType(ContentType.JSON)
-                .baseUri(BASE_URI)
+        return spec()
                 .body(user2)
                 .when()
-                .patch(COURIER_AUTH_PATH + "/user")
+                .patch(CHANGE_USER_URL)
                 .then()
                 .log().all();
     }
