@@ -44,7 +44,9 @@ public class OrderCreationTest {
     }
     @After
     public void tearDown(){
-        userClientAPI.deleteUser(accessToken);
+        if (accessToken !=null){
+            userClientAPI.deleteUser(accessToken);
+        }
     }
 
     @DisplayName("Creating order with correct ingredients")

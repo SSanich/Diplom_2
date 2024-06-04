@@ -39,7 +39,7 @@ public class UserCheck {
     }
 
     @Step("Check can not login with wrong params")
-    public void checkNotLoggedInWithoutRequiredField(ValidatableResponse loginResponse) {
+    public void checkNotLoggedInWithWrongParam(ValidatableResponse loginResponse) {
         loginResponse
                 .assertThat()
                 .body("success", equalTo(false))

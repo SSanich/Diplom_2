@@ -48,7 +48,9 @@ public class GetOrdersTest {
 
     @After
     public void tearDown() {
-        userClientAPI.deleteUser(accessToken);
+        if (accessToken !=null){
+            userClientAPI.deleteUser(accessToken);
+        }
     }
 
     @DisplayName("getting orders auth user")

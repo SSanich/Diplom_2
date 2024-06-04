@@ -4,6 +4,7 @@ import Praktikum.user.User;
 import Praktikum.user.UserCheck;
 import Praktikum.user.UserClientAPI;
 import Praktikum.user.UserCredentials;
+import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
@@ -13,14 +14,18 @@ public class UserCreationTest {
     private String accessToken;
     private final UserClientAPI userClientAPI = new UserClientAPI();
     UserCheck userCheck = new UserCheck();
+
     @After
-    public void tearDown(){
-        userClientAPI.deleteUser(accessToken);
+    public void tearDown() {
+        if (accessToken != null) {
+            userClientAPI.deleteUser(accessToken);
+        }
     }
 
     @DisplayName("Successfully creation of unique user check")
+    @Description(" POST/ api/ auth/ register")
     @Test
-    public void createUniqueUserTest(){
+    public void createUserTest() {
         var user = User.random();
         ValidatableResponse createResponse = userClientAPI.createUser(user);
         userCheck.checkCreatedSuccessfully(createResponse);
@@ -32,8 +37,9 @@ public class UserCreationTest {
     }
 
     @DisplayName("Can not create existing user")
+    @Description(" POST/ api/ auth/ register")
     @Test
-    public void createSameUserTest(){
+    public void createSameUserTest() {
         var user = User.random();
         ValidatableResponse createResponse = userClientAPI.createUser(user);
         userCheck.checkCreatedSuccessfully(createResponse);
@@ -47,5 +53,33 @@ public class UserCreationTest {
         accessToken = userClientAPI.getAccessToken(loginResponse);
     }
 
+    @DisplayName("Can not create user without mail field")
+    @Description(" POST/ api/ auth/ register")
+    @Test
+    public void createUserWithoutMailField() {
+        var user = User.random();
+        user.setEmail("");
+        ValidatableResponse createResponse = userClientAPI.createUser(user);
+        userCheck.checkNotCreatedWithoutOneField(createResponse);
+    }
 
+    @DisplayName("Can not create user without password field")
+    @Description(" POST/ api/ auth/ register")
+    @Test
+    public void createUserWithoutPasswordField() {
+        var user = User.random();
+        user.setPassword("");
+        ValidatableResponse createResponse = userClientAPI.createUser(user);
+        userCheck.checkNotCreatedWithoutOneField(createResponse);
+    }
+
+    @DisplayName("Can not create user without name field")
+    @Description(" POST/ api/ auth/ register")
+    @Test
+    public void createUserWithoutNameField() {
+        var user = User.random();
+        user.setName("");
+        ValidatableResponse createResponse = userClientAPI.createUser(user);
+        userCheck.checkNotCreatedWithoutOneField(createResponse);
+    }
 }
