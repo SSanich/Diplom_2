@@ -11,7 +11,7 @@ public class UserCheck {
         createResponse
                 .assertThat()
                 .body("success", equalTo(true))
-                .statusCode(HttpURLConnection.HTTP_CREATED);
+                .statusCode(HttpURLConnection.HTTP_OK);
     }
 
     @Step("Check user login successfully")
@@ -27,6 +27,7 @@ public class UserCheck {
         createSecondUserResponse
                 .assertThat()
                 .body("success", equalTo(false))
+                .body("message", equalTo("User already exists"))
                 .statusCode(HttpURLConnection.HTTP_FORBIDDEN);
     }
 
@@ -35,6 +36,8 @@ public class UserCheck {
         createResponse
                 .assertThat()
                 .body("success", equalTo(false))
+                .body("message", equalTo("Email, password and name are required fields"))
+
                 .statusCode(HttpURLConnection.HTTP_FORBIDDEN);
     }
 
@@ -43,6 +46,7 @@ public class UserCheck {
         loginResponse
                 .assertThat()
                 .body("success", equalTo(false))
+                .body("message", equalTo("email or password are incorrect"))
                 .statusCode(HttpURLConnection.HTTP_UNAUTHORIZED);
     }
 

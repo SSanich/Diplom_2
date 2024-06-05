@@ -22,6 +22,7 @@ public class UserLoginTest {
         user = User.random();
         ValidatableResponse createResponse = userClientAPI.createUser(user);
         userCheck.checkCreatedSuccessfully(createResponse);
+        accessToken = userClientAPI.getAccessToken(createResponse);
     }
 
     @After
@@ -38,7 +39,6 @@ public class UserLoginTest {
         var creds = UserCredentials.from(user);
         ValidatableResponse loginResponse = userClientAPI.loginUser((UserCredentials) creds);
         userCheck.checkLoggedInSuccessfully(loginResponse);
-        accessToken = userClientAPI.getAccessToken(loginResponse);
     }
 
     @DisplayName("User can't logg in with wrong mail")
