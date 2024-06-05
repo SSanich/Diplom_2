@@ -45,16 +45,4 @@ public class OrderClientAPI extends Model {
                 .then()
                 .log().all();
     }
-    //  найти способ вытаскивать айди ингридиентов по апи
-//    @Step("get ingridient hash")
-//    public List<Ingridient> getIngredients() {
-//        Response response = given().get(INGREDIENTS_URL);
-//        JsonParser jsonParser = new JsonParser();
-//        JsonElement jsonData = jsonParser.parse(response.asPrettyString())
-//                .getAsJsonObject()
-//                .get("data");
-//        Gson gson = new Gson();
-//        return gson.fromJson(jsonData, new TypeToken<List<Ingridient>>() {}.getType());
-//    }
-
 }

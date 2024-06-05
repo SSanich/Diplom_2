@@ -11,7 +11,7 @@ public class UserCheck {
         createResponse
                 .assertThat()
                 .body("success", equalTo(true))
-                .statusCode(HttpURLConnection.HTTP_OK);
+                .statusCode(HttpURLConnection.HTTP_CREATED);
     }
 
     @Step("Check user login successfully")
@@ -48,15 +48,16 @@ public class UserCheck {
 
     @Step("Check of change user data")
     public void checkChanged(ValidatableResponse changeResponse) {
-         changeResponse
-                 .assertThat()
-                 .body("success", equalTo(true));
+        changeResponse
+                .assertThat()
+                .body("success", equalTo(true));
     }
 
     @Step("Check not auth user can not change data")
     public void checkChangedWithoutAuth(ValidatableResponse changeResponse) {
         changeResponse
                 .assertThat()
-                .body("success", equalTo(false));
+                .body("success", equalTo(false))
+                .statusCode(HttpURLConnection.HTTP_UNAUTHORIZED);
     }
 }

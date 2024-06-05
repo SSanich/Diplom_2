@@ -14,14 +14,14 @@ public class UserCreationTest {
     private String accessToken;
     private final UserClientAPI userClientAPI = new UserClientAPI();
     UserCheck userCheck = new UserCheck();
-
     @After
     public void tearDown() {
         if (accessToken != null) {
             userClientAPI.deleteUser(accessToken);
         }
     }
-
+// согласно документации сервер возвращает код 200, что не совсем корректно, ожидаемо код 201 (Created).
+    // тест будет падать
     @DisplayName("Successfully creation of unique user check")
     @Description(" POST/ api/ auth/ register")
     @Test
@@ -29,11 +29,7 @@ public class UserCreationTest {
         var user = User.random();
         ValidatableResponse createResponse = userClientAPI.createUser(user);
         userCheck.checkCreatedSuccessfully(createResponse);
-// логинимся, чтобы получить токен
-        var creds = UserCredentials.from(user);
-        ValidatableResponse loginResponse = userClientAPI.loginUser((UserCredentials) creds);
-        userCheck.checkLoggedInSuccessfully(loginResponse);
-        accessToken = userClientAPI.getAccessToken(loginResponse);
+        accessToken = userClientAPI.getAccessToken(createResponse);
     }
 
     @DisplayName("Can not create existing user")

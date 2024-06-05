@@ -1,6 +1,7 @@
 package Praktikum.user;
 
 import static Praktikum.Constants.*;
+
 import Praktikum.Model;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
@@ -17,15 +18,14 @@ public class UserClientAPI extends Model {
 
     @Step("Get access token")
     public String getAccessToken(ValidatableResponse createResponse) {
-        String accessToken;
-        return accessToken = createResponse
+        return createResponse
                 .extract()
                 .path("accessToken");
     }
 
     @Step("Delete user")
-    public ValidatableResponse deleteUser(String accessToken) {
-        return spec()
+    public void deleteUser(String accessToken) {
+        spec()
                 .header("authorization", accessToken)
                 .when()
                 .delete(CHANGE_USER_URL)
@@ -42,10 +42,10 @@ public class UserClientAPI extends Model {
     }
 
     @Step("Changing user data")
-    public ValidatableResponse changeUserData(String accessToken, User user2) {
+    public ValidatableResponse changeUserData(String accessToken, User user) {
         return spec()
                 .header("authorization", accessToken)
-                .body(user2)
+                .body(user)
                 .when()
                 .patch(CHANGE_USER_URL)
                 .then()
@@ -53,9 +53,9 @@ public class UserClientAPI extends Model {
     }
 
     @Step("Changing not auth user data")
-    public ValidatableResponse changeUserDataWithoutAuth(User user2) {
+    public ValidatableResponse changeUserDataWithoutAuth(User user) {
         return spec()
-                .body(user2)
+                .body(user)
                 .when()
                 .patch(CHANGE_USER_URL)
                 .then()

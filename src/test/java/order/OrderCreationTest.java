@@ -48,7 +48,8 @@ public class OrderCreationTest {
             userClientAPI.deleteUser(accessToken);
         }
     }
-
+// в документации не указан код ответа. Фактически возвращается 200, хотя должен 201(Created)
+    // тест падает, код 201 не является ожидаемым
     @DisplayName("Creating order with correct ingredients")
     @Description("Get orders with auth user. POST/api/orders")
     @Test
@@ -59,7 +60,9 @@ public class OrderCreationTest {
         ValidatableResponse orderResponse = orderClientAPI.CreateOrder(order);
         orderCheck.checkCreatedOrder(orderResponse);
     }
-
+    //в документации допущена явная ошибка. Указано, что при передаче не валидного хеша возвращается ошибка 500
+    //что не корректно. Должна возвращаться ошибка 400. В данном случае тест написан согласно документации и не падает
+    // на боевом проекте, ситуацию неообходимо обсудить с разработчиками/аналитиками
     @DisplayName("Creating order with incorrect ingredients ")
     @Description("Get orders with auth user. POST/api/orders")
     @Test
@@ -70,7 +73,6 @@ public class OrderCreationTest {
         ValidatableResponse orderResponse = orderClientAPI.CreateOrder(order);
         orderCheck.checkCreatedOrderBadHash(orderResponse);
     }
-
     @DisplayName("Creating order with no ingredients auth user")
     @Description("Get orders with auth user. POST/api/orders")
     @Test

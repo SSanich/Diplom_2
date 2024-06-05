@@ -18,7 +18,7 @@ public class OrderCheck {
     public void checkCreatedOrderNoHash(ValidatableResponse orderResponse) {
         orderResponse
                 .assertThat()
-                .statusCode(HttpURLConnection.HTTP_INTERNAL_ERROR);
+                .statusCode(HttpURLConnection.HTTP_BAD_REQUEST);
     }
 
     @Step("Check order not create with false hash ingredients")
