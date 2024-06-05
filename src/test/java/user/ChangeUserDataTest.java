@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ChangeUserWithAuthTest {
+public class ChangeUserDataTest {
     private String accessToken;
     User user;
     private final UserClientAPI userClientAPI = new UserClientAPI();
