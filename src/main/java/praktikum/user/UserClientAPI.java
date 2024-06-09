@@ -1,8 +1,8 @@
-package Praktikum.user;
+package praktikum.user;
 
-import static Praktikum.Constants.*;
+import static praktikum.Constants.*;
 
-import Praktikum.Model;
+import praktikum.Model;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 

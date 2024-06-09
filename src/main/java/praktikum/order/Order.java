@@ -1,4 +1,4 @@
-package Praktikum.order;
+package praktikum.order;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package Praktikum.order;
+package praktikum.order;
 
-import Praktikum.Model;
+import praktikum.Model;
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
-import static Praktikum.Constants.*;
+import static praktikum.Constants.*;
 import static io.restassured.RestAssured.given;
 
 public class OrderClientAPI extends Model {

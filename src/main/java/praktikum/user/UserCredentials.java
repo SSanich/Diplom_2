@@ -1,4 +1,4 @@
-package Praktikum.user;
+package praktikum.user;
 
 public class UserCredentials {
     private String email;

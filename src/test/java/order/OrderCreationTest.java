@@ -1,11 +1,11 @@
 package order;
 
-import Praktikum.ingredients.IngredientsAPI;
-import Praktikum.ingredients.OrderIngredients;
-import Praktikum.order.*;
-import Praktikum.user.User;
-import Praktikum.user.UserCheck;
-import Praktikum.user.UserClientAPI;
+import praktikum.ingredients.IngredientsAPI;
+import praktikum.ingredients.OrderIngredients;
+import praktikum.order.*;
+import praktikum.user.User;
+import praktikum.user.UserCheck;
+import praktikum.user.UserClientAPI;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;

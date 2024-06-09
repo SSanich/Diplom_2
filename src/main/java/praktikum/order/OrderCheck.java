@@ -1,4 +1,4 @@
-package Praktikum.order;
+package praktikum.order;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;

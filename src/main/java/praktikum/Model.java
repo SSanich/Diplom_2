@@ -1,9 +1,9 @@
-package Praktikum;
+package praktikum;
 
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
-import static Praktikum.Constants.BASE_URI;
+import static praktikum.Constants.BASE_URI;
 import static io.restassured.RestAssured.given;
 
 public class Model {

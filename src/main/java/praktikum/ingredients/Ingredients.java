@@ -1,4 +1,4 @@
-package Praktikum.ingredients;
+package praktikum.ingredients;
 
 public class Ingredients {
     private String _id;

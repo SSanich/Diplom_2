@@ -1,4 +1,4 @@
-package Praktikum.ingredients;
+package praktikum.ingredients;
 
 import java.util.List;
 

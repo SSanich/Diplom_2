@@ -1,10 +1,10 @@
-package Praktikum.ingredients;
+package praktikum.ingredients;
 
-import Praktikum.Constants;
+import praktikum.Constants;
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 
-import static Praktikum.Constants.BASE_URI;
+import static praktikum.Constants.BASE_URI;
 import static io.restassured.RestAssured.given;
 
 public class IngredientsAPI {

@@ -1,4 +1,4 @@
-package Praktikum;
+package praktikum;
 public class Constants {
     public static final String BASE_URI = "https://stellarburgers.nomoreparties.site";
     public static final String CREATE_USER_URL = "/api/auth/register";

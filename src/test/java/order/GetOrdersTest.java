@@ -1,10 +1,10 @@
 package order;
 
-import Praktikum.order.OrderCheck;
-import Praktikum.order.OrderClientAPI;
-import Praktikum.user.User;
-import Praktikum.user.UserCheck;
-import Praktikum.user.UserClientAPI;
+import praktikum.order.OrderCheck;
+import praktikum.order.OrderClientAPI;
+import praktikum.user.User;
+import praktikum.user.UserCheck;
+import praktikum.user.UserClientAPI;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;

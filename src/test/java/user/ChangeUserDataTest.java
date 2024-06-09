@@ -1,12 +1,12 @@
 package user;
 
-import Praktikum.user.UserCheck;
+import praktikum.user.UserCheck;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
-import Praktikum.user.User;
-import Praktikum.user.UserClientAPI;
-import Praktikum.user.UserCredentials;
+import praktikum.user.User;
+import praktikum.user.UserClientAPI;
+import praktikum.user.UserCredentials;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
